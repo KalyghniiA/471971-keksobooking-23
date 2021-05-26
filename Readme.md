@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
-* Студент: [Саша Калюжный](https://up.htmlacademy.ru/javascript/23/user/471971).
-* Наставник: `Неизвестно`.
+- Студент: [Саша Калюжный](https://up.htmlacademy.ru/javascript/23/user/471971).
+- Наставник: [Сергей Шершнев](https://htmlacademy.ru/profile/shv_sergey).
 
 ---
 
