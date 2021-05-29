@@ -3,51 +3,51 @@ const coordinates = [
   {
     startNumber: 0,
     endNumber: 3,
-    symbolsAfterComma: 1,
+    precision: 1,
   },
   {
     startNumber: 3,
     endNumber: 5,
-    symbolsAfterComma: 2,
+    precision: 2,
   },
   {
     startNumber: 1,
     endNumber: 5,
-    symbolsAfterComma: 4,
+    precision: 4,
   },
 ];
 
 
-const getRandomNumber = ({startNumber: start = 0, endNumber: end = 0}) => {
+const getRandomNumber = ({startNumber: start, endNumber: end}) => {
   if(start > end) {
-    return ReferenceError('Начальное число больше конечного');
+    throw new Error('Начальное число больше конечного');
   }
 
   if(start < 0 || end < 0) {
-    return ReferenceError('Числа должны быть положительными');
+    throw new Error('Числа должны быть положительными');
   }
 
   return Math.floor(Math.random() * (end - start) + start);
 };
 
 
-const getRandomNumberWithDot = ({startNumber: start = 0, endNumber: end = 1, symbolsAfterComma = 1}) => {
+const getRandomFloat = ({startNumber: start, endNumber: end, precision}) => {
   if(start > end) {
-    return ReferenceError('Начальное число больше конечного');
+    throw new Error('Начальное число больше конечного');
   }
 
   if(start < 0 || end < 0) {
-    return ReferenceError('Числа должны быть положительными');
+    throw new Error('Числа должны быть положительными');
   }
 
-  return (Math.random() * (end - start) + start).toFixed(symbolsAfterComma);
+  return (Math.random() * (end - start) + start).toFixed(precision);
 };
 
 
-coordinates.forEach((el) => {
-  getRandomNumberWithDot(el);
+coordinates.forEach((coordinate) => {
+  getRandomFloat(coordinate);
 });
 
-coordinates.forEach((el) => {
-  getRandomNumber(el);
+coordinates.forEach((coordinate) => {
+  getRandomNumber(coordinate);
 });
