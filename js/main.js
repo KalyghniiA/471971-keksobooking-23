@@ -18,7 +18,7 @@ const coordinates = [
 ];
 
 
-const getRandomNumber = ({startNumber: start, endNumber: end}) => {
+const validityRandomNumber = (start, end) => {
   if(start > end) {
     throw new Error('Начальное число больше конечного');
   }
@@ -26,19 +26,17 @@ const getRandomNumber = ({startNumber: start, endNumber: end}) => {
   if(start < 0 || end < 0) {
     throw new Error('Числа должны быть положительными');
   }
+};
+
+const getRandomNumber = ({startNumber: start, endNumber: end}) => {
+  validityRandomNumber(start,end);
 
   return Math.floor(Math.random() * (end - start) + start);
 };
 
 
 const getRandomFloat = ({startNumber: start, endNumber: end, precision}) => {
-  if(start > end) {
-    throw new Error('Начальное число больше конечного');
-  }
-
-  if(start < 0 || end < 0) {
-    throw new Error('Числа должны быть положительными');
-  }
+  validityRandomNumber(start,end);
 
   return (Math.random() * (end - start) + start).toFixed(precision);
 };
@@ -51,3 +49,88 @@ coordinates.forEach((coordinate) => {
 coordinates.forEach((coordinate) => {
   getRandomNumber(coordinate);
 });
+
+//Validation
+
+const inputTitleField = document.querySelector('#title');
+const selectTypeHousing = document.querySelector('#type');
+const inputPrice = document.querySelector('#price');
+const selectQuantotyRoom = document.querySelector('#room_number');
+const selectCapacity = document.querySelector('#capacity');
+const inputAddress = document.querySelector('#address');
+const selectTimeIn = document.querySelector('#timein');
+const selectTimeOut = document.querySelector('#timeout');
+
+inputTitleField.minLength = 30;
+inputTitleField.maxLenght = 100;
+inputTitleField.required = true;
+inputPrice.min = 1000;
+inputPrice.max = 1000000;
+inputPrice.required = true;
+inputAddress.disabled = true;
+
+
+const typesOfHousing = [
+  {
+    type: 'bungalow',
+    minPrice: 0,
+  },
+  {
+    type: 'flat',
+    minPrice: 1000,
+  },
+  {
+    type: 'hotel',
+    minPrice: 3000,
+  },
+  {
+    type: 'house',
+    minPrice: 5000,
+  },
+  {
+    type: 'palace',
+    minPrice: 10000,
+  },
+];
+
+
+const roomsDictionary = {
+  1: [
+    1,
+  ],
+  2: [
+    1,
+    2,
+  ],
+  3: [
+    1, 2, 3,
+  ],
+  100:[
+    0,
+  ],
+};
+
+selectTypeHousing.addEventListener('change', () => {
+  typesOfHousing.forEach(({type, minPrice}) => {
+    if(selectTypeHousing.value === type) {
+      inputPrice.min = minPrice;
+    }
+  });
+});
+
+selectQuantotyRoom.addEventListener('change', (evt) => {
+  for(const quantityPerson of selectCapacity.children) {
+
+    quantityPerson.disabled = !roomsDictionary[evt.target.value].includes(+quantityPerson.value);
+  }
+});
+
+
+selectTimeIn.addEventListener('change', (evt) => {
+  selectTimeOut.value = evt.target.value;
+});
+
+selectTimeOut.addEventListener('change', (evt) => {
+  selectTimeIn.value = evt.target.value;
+});
+
