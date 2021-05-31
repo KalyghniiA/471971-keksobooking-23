@@ -52,22 +52,12 @@ coordinates.forEach((coordinate) => {
 
 //Validation
 
-const inputTitleField = document.querySelector('#title');
 const selectTypeHousing = document.querySelector('#type');
 const inputPrice = document.querySelector('#price');
 const selectQuantotyRoom = document.querySelector('#room_number');
 const selectCapacity = document.querySelector('#capacity');
-const inputAddress = document.querySelector('#address');
 const selectTimeIn = document.querySelector('#timein');
 const selectTimeOut = document.querySelector('#timeout');
-
-inputTitleField.minLength = 30;
-inputTitleField.maxLenght = 100;
-inputTitleField.required = true;
-inputPrice.min = 1000;
-inputPrice.max = 1000000;
-inputPrice.required = true;
-inputAddress.disabled = true;
 
 
 const typesOfHousing = [
