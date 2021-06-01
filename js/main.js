@@ -98,13 +98,16 @@ selectQuantityRoom.addEventListener('change', (evt) => {
     quantityPerson.disabled = !ROOMS_TO_GUESTS_MAPPER[
       evt.target.value
     ].includes(+quantityPerson.value);
+    quantityPerson.selected = ROOMS_TO_GUESTS_MAPPER[
+      evt.target.value
+    ].includes(+quantityPerson.value);
   }
-  for (const quantityPerson of selectCapacity.children) {
+  /* for (const quantityPerson of selectCapacity.children) {
     if(ROOMS_TO_GUESTS_MAPPER[evt.target.value].includes(+quantityPerson.value)) {
       quantityPerson.selected = true;
       break;
     }
-  }
+  } */
 });
 
 selectTimeIn.addEventListener('change', (evt) => {
