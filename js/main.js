@@ -48,14 +48,12 @@ coordinates.forEach((coordinate) => {
 
 //Validation
 
-const inputTitleField = document.querySelector('#title');
 const selectTypeHousing = document.querySelector('#type');
 const inputPrice = document.querySelector('#price');
 const selectQuantityRoom = document.querySelector('#room_number');
 const selectCapacity = document.querySelector('#capacity');
 const selectTimeIn = document.querySelector('#timein');
 const selectTimeOut = document.querySelector('#timeout');
-const formAdvertisement = document.querySelector('form.ad-form');
 
 const TYPES_OF_HOUSING = [
   {
