@@ -117,14 +117,3 @@ selectTimeOut.addEventListener('change', (evt) => {
   selectTimeIn.value = evt.target.value;
 });
 
-formAdvertisement.addEventListener('submit', (evt) => {
-  if (!inputTitleField.value) {
-    evt.preventDefault();
-    throw new Error('Не указан заголовок');
-  }
-
-  if (!inputPrice.value) {
-    evt.preventDefault();
-    throw new Error('Не указана цена');
-  }
-});
