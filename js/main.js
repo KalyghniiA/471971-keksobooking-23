@@ -94,20 +94,18 @@ selectTypeHousing.addEventListener('change', () => {
 });
 
 selectQuantityRoom.addEventListener('change', (evt) => {
+  let flag = false;
+
   for (const quantityPerson of selectCapacity.children) {
-    quantityPerson.disabled = !ROOMS_TO_GUESTS_MAPPER[
-      evt.target.value
-    ].includes(+quantityPerson.value);
-    quantityPerson.selected = ROOMS_TO_GUESTS_MAPPER[
-      evt.target.value
-    ].includes(+quantityPerson.value);
-  }
-  /* for (const quantityPerson of selectCapacity.children) {
-    if(ROOMS_TO_GUESTS_MAPPER[evt.target.value].includes(+quantityPerson.value)) {
+    const isAvailableQuantity = ROOMS_TO_GUESTS_MAPPER[evt.target.value].includes(+quantityPerson.value);
+    quantityPerson.disabled = !isAvailableQuantity;
+
+    if(!flag && isAvailableQuantity) {
+      flag = true;
       quantityPerson.selected = true;
-      break;
     }
-  } */
+
+  }
 });
 
 selectTimeIn.addEventListener('change', (evt) => {
