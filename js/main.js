@@ -35,24 +35,37 @@ const TYPES_OF_HOUSING = [
   {
     type: 'bungalow',
     minPrice: 0,
+
   },
   {
     type: 'flat',
     minPrice: 1000,
+
   },
   {
     type: 'hotel',
     minPrice: 3000,
+
   },
   {
     type: 'house',
     minPrice: 5000,
+
   },
   {
     type: 'palace',
     minPrice: 10000,
+
   },
 ];
+
+const TRANSLATION_TYPE_HOUSING = {
+  bungalow: 'Бунгало',
+  flat: 'Квартира',
+  hotel: 'Отель',
+  house: 'Дом',
+  palace: 'Дворец',
+};
 
 const ROOMS_TO_GUESTS_MAPPER = {
   1: [1],
@@ -70,14 +83,14 @@ selectTypeHousing.addEventListener('change', () => {
 });
 
 selectQuantityRoom.addEventListener('change', (evt) => {
-  let flag = false;
+  let isSelectSet = false;
 
   for (const quantityPerson of selectCapacity.children) {
     const isAvailableQuantity = ROOMS_TO_GUESTS_MAPPER[evt.target.value].includes(+quantityPerson.value);
     quantityPerson.disabled = !isAvailableQuantity;
 
-    if(!flag && isAvailableQuantity) {
-      flag = true;
+    if(!isSelectSet && isAvailableQuantity) {
+      isSelectSet = true;
       quantityPerson.selected = true;
     }
 
@@ -153,3 +166,81 @@ const creationTestObjects = (quantity) => new Array(quantity).fill(null).map(() 
 
 
 creationTestObjects(QUANTITY_TEST_OBJECTS);
+
+// add map
+
+const mymap = L.map('mapid').setView([35.67241003316495, 139.74678744350908], 13);
+L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWthbHlnaG5paSIsImEiOiJja3BtaGdyYzIwZmh5Mm9tZXVuamZ6cGJvIn0.BCZrDM9bJwrbOYzVqxDZjw', {
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  maxZoom: 18,
+  id: 'mapbox/streets-v11',
+  tileSize: 512,
+  zoomOffset: -1,
+  accessToken: 'your.mapbox.access.token',
+}).addTo(mymap);
+
+
+const SERVER_PATH = 'https://23.javascript.pages.academy/keksobooking/data';
+const templateUserPopap = document.querySelector('#card');
+
+
+const createPopapCard = ({author, offer}) => {
+  const element = templateUserPopap.cloneNode(true).content;
+  const textPrice = `${offer.price} <span>₽/ночь</span>`;
+  const popupFeatures = element.querySelector('.popup__features');
+  const features = offer.features;
+  const popupPhotos = element.querySelector('.popup__photos');
+  const photos = offer.photos;
+
+  element.querySelector('.popup').src = author.avatar;
+  element.querySelector('.popup__title').textContent = offer.title;
+  element.querySelector('.popup__text--address').textContent = offer.address;
+  element.querySelector('.popup__text--price').innerHTML = textPrice;
+  element.querySelector('.popup__type').textContent = TRANSLATION_TYPE_HOUSING[offer.type];
+  element.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.quests} гостей`;
+  element.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
+
+  popupFeatures.textContent = '';
+  if(features) {
+    features.forEach((featureClass) => {
+      const feature = document.createElement('li');
+      feature.classList.add('popup__feature');
+      feature.classList.add(`popup__feature--${featureClass}`);
+      popupFeatures.appendChild(feature);
+    });
+  }
+
+  element.querySelector('.popup__description').textContent = offer.description;
+  popupPhotos.textContent = '';
+  if(photos) {
+    photos.forEach((photoSrc) => {
+      const photo = document.createElement('img');
+
+      photo.classList.add('popup__photo');
+      photo.width = 45;
+      photo.height = 40;
+      photo.alt = 'Фотография жилья';
+      photo.src = photoSrc;
+      popupPhotos.appendChild(photo);
+    });
+  }
+
+  return element;
+};
+
+const createPopapCards = (cardsArray) => {
+  const fragment = document.createDocumentFragment();
+  cardsArray.forEach((card) => {
+    fragment.appendChild(createPopapCard(card));
+  });
+
+  return fragment;
+};
+
+fetch(SERVER_PATH)
+  .then((response) => response.json())
+  .then((data) => {
+    createPopapCards(data);
+
+  });
+

@@ -4,6 +4,12 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <title>Кексобукинг</title>
   </head>
@@ -24,7 +30,7 @@
       <!-- Карта объявлений -->
       <section class="map">
         <!-- Блок для вставки карты -->
-        <div class="map__canvas" id="map-canvas"></div>
+        <div class="map__canvas" id="mapid"></div>
 
         <!-- Фильтрация объявлений -->
         <div class="map__filters-container">
