@@ -184,7 +184,7 @@ const SERVER_PATH = 'https://23.javascript.pages.academy/keksobooking/data';
 const templateUserPopap = document.querySelector('#card');
 
 
-const createPopapCard = ({author, offer}) => {
+const createPopapCard = ({author, offer, location}) => {
   const element = templateUserPopap.cloneNode(true).content;
   const textPrice = `${offer.price} <span>₽/ночь</span>`;
   const popupFeatures = element.querySelector('.popup__features');
@@ -224,6 +224,13 @@ const createPopapCard = ({author, offer}) => {
       popupPhotos.appendChild(photo);
     });
   }
+
+  const marker = L.marker([location.lat, location.lng]).addTo(mymap);
+  marker.bindPopup(element).openPopup();
+  /* const popup = L.popup()
+                  .setLatLng([location.lat, location.lng])
+                  .setContent(element)
+                  .openOn(mymap); */
 
   return element;
 };
