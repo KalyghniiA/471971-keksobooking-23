@@ -11,10 +11,10 @@ const HOUSING_TYPE_DICTIONARY = {
 
 const templateUserPopap = document.querySelector('#card');
 
-const createPopupFeatures = (featuresArray, featuresContainer) => {
+const createPopupFeatures = (features, featuresContainer) => {
 
-  if (featuresArray) {
-    featuresArray.forEach((featureClass) => {
+  if (features) {
+    features.forEach((featureClass) => {
       const feature = document.createElement('li');
       feature.classList.add('popup__feature', `popup__feature--${featureClass}`);
       featuresContainer.appendChild(feature);
