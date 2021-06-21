@@ -4,6 +4,7 @@ const selectQuantityRoom = document.querySelector('#room_number');
 const selectCapacity = document.querySelector('#capacity');
 const selectTimeIn = document.querySelector('#timein');
 const selectTimeOut = document.querySelector('#timeout');
+const inputAddres = document.querySelector('#address');
 
 const TYPES_OF_HOUSING = [
   {
@@ -66,4 +67,4 @@ selectTimeOut.addEventListener('change', (evt) => {
   selectTimeIn.value = evt.target.value;
 });
 
-export {TYPES_OF_HOUSING};
+export {TYPES_OF_HOUSING, inputAddres};
