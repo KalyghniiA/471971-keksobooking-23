@@ -1,4 +1,4 @@
-import { mymap } from './map.js';
+import { myMap } from './map.js';
 
 
 const HOUSING_TYPE_DICTIONARY = {
@@ -64,7 +64,7 @@ const createPopupCard = ({ author, offer, location }) => {
   const content = document.createElement('div');
   content.appendChild(element);
 
-  L.marker([location.lat, location.lng]).addTo(mymap).bindPopup(content);
+  L.marker([location.lat, location.lng]).addTo(myMap).bindPopup(content);
 
 
   return element;
