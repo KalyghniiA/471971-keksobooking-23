@@ -6,6 +6,17 @@ const selectTimeIn = document.querySelector('#timein');
 const selectTimeOut = document.querySelector('#timeout');
 const inputAddres = document.querySelector('#address');
 
+
+const formUser = {
+  form: document.querySelector('.ad-form'),
+  childrens: [...document.querySelectorAll('.ad-form fieldset')],
+};
+
+const formFilters ={
+  form: document.querySelector('.map__filters'),
+  childrens: [...document.querySelectorAll('.map__filters fieldset,select')],
+};
+
 const TYPES_OF_HOUSING = [
   {
     type: 'bungalow',
@@ -67,4 +78,13 @@ selectTimeOut.addEventListener('change', (evt) => {
   selectTimeIn.value = evt.target.value;
 });
 
-export {TYPES_OF_HOUSING, inputAddres};
+const toggleVisibleForm = ({form, childrens}) => {
+  form.classList.toggle('ad-form--disabled');
+  childrens.forEach((children) => children.disabled = !children.disabled);
+};
+
+
+toggleVisibleForm(formUser);
+toggleVisibleForm(formFilters);
+
+export {TYPES_OF_HOUSING, inputAddres, toggleVisibleForm, formUser, formFilters};
