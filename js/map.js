@@ -4,7 +4,7 @@ const MAP_LNG = 139.839478;
 const USER_MARKER_LAT = 35.65952;
 const USER_MARKER_LNG = 139.78179;
 const ZOOM_MAP = 12;
-const enableFormParameter = true;
+const enableFormParameter = false;
 
 const USER_MARKER_SETTING = {
   url: './img/user-marker.svg',
