@@ -4,7 +4,7 @@ const MAP_LNG = 139.839478;
 const USER_MARKER_LAT = 35.65952;
 const USER_MARKER_LNG = 139.78179;
 const ZOOM_MAP = 12;
-
+const enableFormParameter = true;
 
 const USER_MARKER_SETTING = {
   url: './img/user-marker.svg',
@@ -14,8 +14,8 @@ const USER_MARKER_SETTING = {
 inputAddres.value = `${USER_MARKER_LAT}, ${USER_MARKER_LNG}`;
 const myMap = L.map('mapid')
   .on('load', () => {
-    toggleVisibleForm(formUser);
-    toggleVisibleForm(formFilters);
+    toggleVisibleForm(formUser, enableFormParameter);
+    toggleVisibleForm(formFilters, enableFormParameter);
   })
   .setView([MAP_LAT, MAP_LNG], ZOOM_MAP);
 L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWthbHlnaG5paSIsImEiOiJja3BtaGdyYzIwZmh5Mm9tZXVuamZ6cGJvIn0.BCZrDM9bJwrbOYzVqxDZjw', {

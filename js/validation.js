@@ -47,6 +47,8 @@ const ROOMS_TO_GUESTS_MAPPER = {
   100: [0],
 };
 
+const disabledFormParameter = true;
+
 selectTypeHousing.addEventListener('change', () => {
   TYPES_OF_HOUSING.forEach(({ type, minPrice }) => {
     if (selectTypeHousing.value === type) {
@@ -78,13 +80,19 @@ selectTimeOut.addEventListener('change', (evt) => {
   selectTimeIn.value = evt.target.value;
 });
 
-const toggleVisibleForm = ({form, childrens}) => {
-  form.classList.toggle('ad-form--disabled');
-  childrens.forEach((children) => children.disabled = !children.disabled);
+const toggleVisibleForm = ({form, childrens}, flaq) => {
+
+  if(flaq){
+    form.classList.add('ad-form--disabled');
+    childrens.forEach((children) => children.disabled = !children.disabled);
+  } else {
+    form.classList.remove('ad-form--disabled');
+    childrens.forEach((children) => children.disabled = !children.disabled);
+  }
 };
 
 
-toggleVisibleForm(formUser);
-toggleVisibleForm(formFilters);
+toggleVisibleForm(formUser, disabledFormParameter);
+toggleVisibleForm(formFilters, disabledFormParameter);
 
 export {TYPES_OF_HOUSING, inputAddres, toggleVisibleForm, formUser, formFilters};
