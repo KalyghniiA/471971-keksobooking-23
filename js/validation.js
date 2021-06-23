@@ -6,6 +6,17 @@ const selectTimeIn = document.querySelector('#timein');
 const selectTimeOut = document.querySelector('#timeout');
 const inputAddres = document.querySelector('#address');
 
+
+const formUser = {
+  form: document.querySelector('.ad-form'),
+  childrens: [...document.querySelectorAll('.ad-form fieldset')],
+};
+
+const formFilters ={
+  form: document.querySelector('.map__filters'),
+  childrens: [...document.querySelectorAll('.map__filters fieldset,select')],
+};
+
 const TYPES_OF_HOUSING = [
   {
     type: 'bungalow',
@@ -35,6 +46,8 @@ const ROOMS_TO_GUESTS_MAPPER = {
   3: [1, 2, 3],
   100: [0],
 };
+
+const disabledFormParameter = true;
 
 selectTypeHousing.addEventListener('change', () => {
   TYPES_OF_HOUSING.forEach(({ type, minPrice }) => {
@@ -67,4 +80,19 @@ selectTimeOut.addEventListener('change', (evt) => {
   selectTimeIn.value = evt.target.value;
 });
 
-export {TYPES_OF_HOUSING, inputAddres};
+const toggleVisibleForm = ({form, childrens}, flaq) => {
+
+  if(flaq){
+    form.classList.add('ad-form--disabled');
+    childrens.forEach((children) => children.disabled = !children.disabled);
+  } else {
+    form.classList.remove('ad-form--disabled');
+    childrens.forEach((children) => children.disabled = !children.disabled);
+  }
+};
+
+
+toggleVisibleForm(formUser, disabledFormParameter);
+toggleVisibleForm(formFilters, disabledFormParameter);
+
+export {TYPES_OF_HOUSING, inputAddres, toggleVisibleForm, formUser, formFilters};
