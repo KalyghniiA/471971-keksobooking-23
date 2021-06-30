@@ -14,8 +14,6 @@ fetch(SERVER_PATH)
   });
 
 
-
-
 const closePopup = (element) => {
   document.body.removeChild(element);
 };
