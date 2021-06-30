@@ -11,6 +11,7 @@ const USER_MARKER_SETTING = {
   size: [52,52],
   anchor: [26, 52],
 };
+
 inputAddres.value = `${USER_MARKER_LAT}, ${USER_MARKER_LNG}`;
 const myMap = L.map('mapid')
   .on('load', () => {
