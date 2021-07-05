@@ -41,4 +41,4 @@ userMarker.on('moveend', (evt) => {
   inputAddres.value = `${lat}, ${lng}`;
 });
 
-export {myMap};
+export {myMap,USER_MARKER_LAT,USER_MARKER_LNG,userMarker};
