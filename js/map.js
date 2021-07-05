@@ -1,4 +1,4 @@
-import { formFilters, formUser, inputAddres, toggleVisibleForm } from './validation.js';
+import { formFilters, formUser, inputAddress, toggleVisibleForm } from './validation.js';
 const MAP_LAT = 35.652832;
 const MAP_LNG = 139.839478;
 const USER_MARKER_LAT = 35.65952;
@@ -12,7 +12,7 @@ const USER_MARKER_SETTING = {
   anchor: [26, 52],
 };
 
-inputAddres.value = `${USER_MARKER_LAT}, ${USER_MARKER_LNG}`;
+inputAddress.value = `${USER_MARKER_LAT}, ${USER_MARKER_LNG}`;
 const myMap = L.map('mapid')
   .on('load', () => {
     toggleVisibleForm(formUser, enableFormParameter);
@@ -38,7 +38,7 @@ const userMarker = L.marker([USER_MARKER_LAT, USER_MARKER_LNG], {icon: userMarke
 
 userMarker.on('moveend', (evt) => {
   const {lat, lng} = evt.target.getLatLng();
-  inputAddres.value = `${lat}, ${lng}`;
+  inputAddress.value = `${lat}, ${lng}`;
 });
 
-export {myMap,USER_MARKER_LAT,USER_MARKER_LNG,userMarker};
+export {myMap, USER_MARKER_LAT, USER_MARKER_LNG, userMarker};

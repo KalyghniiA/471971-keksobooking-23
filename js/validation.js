@@ -1,10 +1,12 @@
+import { userMarker, USER_MARKER_LAT, USER_MARKER_LNG } from './map.js';
+
 const selectTypeHousing = document.querySelector('#type');
 const inputPrice = document.querySelector('#price');
 const selectQuantityRoom = document.querySelector('#room_number');
 const selectCapacity = document.querySelector('#capacity');
 const selectTimeIn = document.querySelector('#timein');
 const selectTimeOut = document.querySelector('#timeout');
-const inputAddres = document.querySelector('#address');
+const inputAddress = document.querySelector('#address');
 
 
 const formUser = {
@@ -91,8 +93,14 @@ const toggleVisibleForm = ({form, childrens}, flaq) => {
   }
 };
 
+const formReset = () => {
+  formUser.form.reset();
+  inputAddress.value = `${USER_MARKER_LAT}, ${USER_MARKER_LNG}`;
+  userMarker.setLatLng(L.latLng(USER_MARKER_LAT, USER_MARKER_LNG));
+};
+
 
 toggleVisibleForm(formUser, disabledFormParameter);
 toggleVisibleForm(formFilters, disabledFormParameter);
 
-export {TYPES_OF_HOUSING, inputAddres, toggleVisibleForm, formUser, formFilters};
+export {TYPES_OF_HOUSING, inputAddress, toggleVisibleForm, formUser, formFilters, formReset};
