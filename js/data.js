@@ -14,27 +14,58 @@ fetch(SERVER_PATH)
   });
 
 
-const closePopup = (element) => {
-  document.body.removeChild(element);
+const closePopupErrorButton = (evt) => {
+  if(evt.key === 'Escape') {
+    const popupError = document.querySelector('.error');
+    popupError.remove();
+  }
+  document.removeEventListener('keydown', closePopupErrorButton);
 };
 
-
-const popupOpen = (templateId, popupClass) => {
-  const popupTemplate = document.querySelector(templateId).cloneNode(true).content;
-  document.body.appendChild(popupTemplate);
-
-  const popup = document.querySelector(popupClass);
-  popup.addEventListener('click', () => {
-    closePopup(popup);
-  });
-
-  window.addEventListener('keydown', (evt) => {
-    if(evt.key === 'Escape') {
-      closePopup(popup);
-    }
-  });
+const closePopupSuccessButton = (evt) => {
+  if(evt.key === 'Escape') {
+    const popupSuccess = document.querySelector('.success');
+    popupSuccess.remove();
+    formUser.querySelector('.ad-form__submit').disabled = false;
+  }
+  document.removeEventListener('keydown', closePopupSuccessButton);
 };
 
+const closePopupErrorClick = () => {
+  const popupError = document.querySelector('.error');
+  popupError.remove();
+
+  document.removeEventListener('keydown', closePopupErrorButton);
+};
+
+const closePopupSuccessClick = () => {
+  const popupSuccess = document.querySelector('.success');
+  popupSuccess.remove();
+  formUser.querySelector('.ad-form__submit').disabled = false;
+  document.removeEventListener('keydown', closePopupSuccessButton);
+};
+
+const popupOpenError = () => {
+  const popupTemplateError = document.querySelector('#error').cloneNode(true).content;
+  document.body.appendChild(popupTemplateError);
+
+  const popup = document.querySelector('.error');
+  popup.addEventListener('click', closePopupErrorClick);
+
+  document.addEventListener('keydown', closePopupErrorButton);
+
+};
+
+const popupOpenSuccess = () => {
+  const popupTemplateSuccess = document.querySelector('#success').cloneNode(true).content;
+  document.body.appendChild(popupTemplateSuccess);
+  formUser.querySelector('.ad-form__submit').disabled = true;
+
+  const popup = document.querySelector('.success');
+  popup.addEventListener('click', closePopupSuccessClick);
+
+  document.addEventListener('keydown', closePopupSuccessButton);
+};
 
 formUser.addEventListener('submit', (evt)=>{
   evt.preventDefault();
@@ -44,7 +75,7 @@ formUser.addEventListener('submit', (evt)=>{
     method: 'POST',
     body: formData,
   })
-    .then(() => popupOpen('#success', '.success'))
-    .catch(() => popupOpen('#error', '.error'));
+    .then(() => popupOpenSuccess())
+    .catch(() => popupOpenError());
 
 });
