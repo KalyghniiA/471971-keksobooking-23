@@ -18,23 +18,26 @@ const closePopupErrorButton = (evt) => {
   if(evt.key === 'Escape') {
     const popupError = document.querySelector('.error');
     popupError.remove();
+    formUser.querySelector('.ad-form__submit').disabled = false;
+    document.removeEventListener('keydown', closePopupErrorButton);
   }
-  document.removeEventListener('keydown', closePopupErrorButton);
+
 };
+
 
 const closePopupSuccessButton = (evt) => {
   if(evt.key === 'Escape') {
     const popupSuccess = document.querySelector('.success');
     popupSuccess.remove();
     formUser.querySelector('.ad-form__submit').disabled = false;
+    document.removeEventListener('keydown', closePopupSuccessButton);
   }
-  document.removeEventListener('keydown', closePopupSuccessButton);
 };
 
 const closePopupErrorClick = () => {
   const popupError = document.querySelector('.error');
   popupError.remove();
-
+  formUser.querySelector('.ad-form__submit').disabled = false;
   document.removeEventListener('keydown', closePopupErrorButton);
 };
 
@@ -48,6 +51,7 @@ const closePopupSuccessClick = () => {
 const popupOpenError = () => {
   const popupTemplateError = document.querySelector('#error').cloneNode(true).content;
   document.body.appendChild(popupTemplateError);
+  formUser.querySelector('.ad-form__submit').disabled = true;
 
   const popup = document.querySelector('.error');
   popup.addEventListener('click', closePopupErrorClick);
@@ -67,7 +71,7 @@ const popupOpenSuccess = () => {
   document.addEventListener('keydown', closePopupSuccessButton);
 };
 
-formUser.addEventListener('submit', (evt)=>{
+formUser.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const formData = new FormData(evt.target);
 
