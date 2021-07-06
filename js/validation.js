@@ -1,6 +1,6 @@
-import { createStartingLocation, userMarker, USER_MARKER_LAT, USER_MARKER_LNG } from './map.js';
+import { onResetForm } from './form.js';
 
-const MIN_PRICE = 1000;
+
 const selectTypeHousing = document.querySelector('#type');
 const inputPrice = document.querySelector('#price');
 const selectQuantityRoom = document.querySelector('#room_number');
@@ -93,17 +93,9 @@ const toggleVisibleForm = ({form, childrens}, shouldDisable) => {
   }
 };
 
-const resetForm = () => {
-  announcementForm.form.reset();
-  inputAddress.value = createStartingLocation();
-  inputPrice.placeholder = MIN_PRICE;
-  userMarker.setLatLng(L.latLng(USER_MARKER_LAT, USER_MARKER_LNG));
-};
-
-
 toggleVisibleForm(announcementForm, disabledFormParameter);
 toggleVisibleForm(formFilters, disabledFormParameter);
 
-buttonReset.addEventListener('click', resetForm);
+buttonReset.addEventListener('click', onResetForm);
 
-export {TYPES_OF_HOUSING, inputAddress, toggleVisibleForm, announcementForm, formFilters, resetForm};
+export {TYPES_OF_HOUSING, inputAddress, toggleVisibleForm, announcementForm, formFilters, inputPrice};

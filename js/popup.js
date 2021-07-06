@@ -1,16 +1,17 @@
-import { announcementForm, resetForm } from './validation.js';
+import { onResetForm, toggleStateForm } from './form.js';
+import { announcementForm} from './validation.js';
 
 
 const removePopupElement = (selector) => {
   document.querySelector(selector).remove();
-  announcementForm.form.querySelector('.ad-form__submit').disabled = false;
-  resetForm();
+  toggleStateForm(false);
+  onResetForm();
 };
 
 const additionPopupElement = (selector) => {
   const popupTemplate = document.querySelector(selector).cloneNode(true).content;
   document.body.appendChild(popupTemplate);
-  announcementForm.form.querySelector('.ad-form__submit').disabled = true;
+  toggleStateForm(true);
 };
 
 const onClosePopupErrorButton = (evt) => {
@@ -29,7 +30,7 @@ const onClosePopupSuccessButton = (evt) => {
   }
 };
 
-const closePopupErrorClick = () => {
+const onClosePopupErrorClick = () => {
   removePopupElement('.error');
   document.removeEventListener('keydown', onClosePopupErrorButton);
 };
@@ -41,16 +42,14 @@ const onClosePopupSuccessClick = () => {
 
 const createPopupError = () => {
   additionPopupElement('#error');
-  const popup = document.querySelector('.error');
-  popup.addEventListener('click', closePopupErrorClick);
+  document.querySelector('.error').addEventListener('click', onClosePopupErrorClick);
   document.addEventListener('keydown', onClosePopupErrorButton);
 
 };
 
 const createPopupSuccess = () => {
   additionPopupElement('#success');
-  const popup = document.querySelector('.success');
-  popup.addEventListener('click', onClosePopupSuccessClick);
+  document.querySelector('.success').addEventListener('click', onClosePopupSuccessClick);
   document.addEventListener('keydown', onClosePopupSuccessButton);
 };
 

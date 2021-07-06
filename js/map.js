@@ -1,20 +1,12 @@
+import { MAP_LAT, MAP_LNG, USER_MARKER_LAT, USER_MARKER_LNG, USER_MARKER_SETTING, ZOOM_MAP } from './constants.js';
 import { formFilters, announcementForm, inputAddress, toggleVisibleForm } from './validation.js';
-const MAP_LAT = 35.652832;
-const MAP_LNG = 139.839478;
-const USER_MARKER_LAT = 35.65952;
-const USER_MARKER_LNG = 139.78179;
-const ZOOM_MAP = 12;
+
 const enableFormParameter = false;
 
-const USER_MARKER_SETTING = {
-  url: './img/user-marker.svg',
-  size: [52,52],
-  anchor: [26, 52],
-};
 
-const createStartingLocation = () => `${USER_MARKER_LAT}, ${USER_MARKER_LNG}`;
+const setStartingLocation = (lat, lng) => `${lat}, ${lng}`;
 
-inputAddress.value = createStartingLocation();
+inputAddress.value = setStartingLocation(USER_MARKER_LAT, USER_MARKER_LNG);
 const myMap = L.map('mapid')
   .on('load', () => {
     toggleVisibleForm(announcementForm, enableFormParameter);
@@ -40,7 +32,7 @@ const userMarker = L.marker([USER_MARKER_LAT, USER_MARKER_LNG], {icon: userMarke
 
 userMarker.on('moveend', (evt) => {
   const {lat, lng} = evt.target.getLatLng();
-  inputAddress.value = `${lat}, ${lng}`;
+  inputAddress.value = setStartingLocation(lat, lng);
 });
 
-export {myMap, USER_MARKER_LAT, USER_MARKER_LNG, userMarker, createStartingLocation};
+export {myMap, userMarker, setStartingLocation};
