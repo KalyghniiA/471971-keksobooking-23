@@ -1,4 +1,4 @@
-import { formFilters, formUser, inputAddress, toggleVisibleForm } from './validation.js';
+import { formFilters, announcementForm, inputAddress, toggleVisibleForm } from './validation.js';
 const MAP_LAT = 35.652832;
 const MAP_LNG = 139.839478;
 const USER_MARKER_LAT = 35.65952;
@@ -12,10 +12,12 @@ const USER_MARKER_SETTING = {
   anchor: [26, 52],
 };
 
-inputAddress.value = `${USER_MARKER_LAT}, ${USER_MARKER_LNG}`;
+const createStartingLocation = () => `${USER_MARKER_LAT}, ${USER_MARKER_LNG}`;
+
+inputAddress.value = createStartingLocation();
 const myMap = L.map('mapid')
   .on('load', () => {
-    toggleVisibleForm(formUser, enableFormParameter);
+    toggleVisibleForm(announcementForm, enableFormParameter);
     toggleVisibleForm(formFilters, enableFormParameter);
   })
   .setView([MAP_LAT, MAP_LNG], ZOOM_MAP);
@@ -41,4 +43,4 @@ userMarker.on('moveend', (evt) => {
   inputAddress.value = `${lat}, ${lng}`;
 });
 
-export {myMap, USER_MARKER_LAT, USER_MARKER_LNG, userMarker};
+export {myMap, USER_MARKER_LAT, USER_MARKER_LNG, userMarker, createStartingLocation};

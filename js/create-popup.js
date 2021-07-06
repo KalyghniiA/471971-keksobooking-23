@@ -12,7 +12,6 @@ const HOUSING_TYPE_DICTIONARY = {
 const templateUserPopap = document.querySelector('#card');
 
 const createPopupFeatures = (features, featuresContainer) => {
-
   if (features) {
     features.forEach((featureClass) => {
       const feature = document.createElement('li');
@@ -50,7 +49,6 @@ const createPopupCard = ({ author, offer, location }) => {
   element.querySelector('.popup__text--price').innerHTML = `${offer.price} <span>₽/ночь</span>`;
   element.querySelector('.popup__type').textContent = HOUSING_TYPE_DICTIONARY[offer.type];
   element.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
-
   element.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
 
   popupFeatures.textContent = '';

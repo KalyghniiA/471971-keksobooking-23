@@ -1,92 +1,25 @@
 import { createPopupCards } from './create-popup.js';
-import { formReset} from './validation.js';
+import { createPopupError, createPopupSuccess} from './popup.js';
+import { announcementForm } from './validation.js';
 
-const SERVER_PATH = 'https://23.javascript.pages.academy/keksobooking/data';
-const EXPORT_SERVER = 'https://23.javascript.pages.academy/keksobooking';
-const formUser = document.querySelector('.ad-form');
-const buttonReset = document.querySelector('.ad-form__reset');
+const SERVER_PATH = 'https://23.javascript.pages.academy/keksobooking';
+const SERVER_DATA = 'https://23.javascript.pages.academy/keksobooking/data';
 
-fetch(SERVER_PATH)
+
+fetch(SERVER_DATA)
   .then((response) => response.json())
   .then((data) => {
-
     createPopupCards(data);
-
   });
 
 
-const closePopupErrorButton = (evt) => {
-  if(evt.key === 'Escape') {
-    const popupError = document.querySelector('.error');
-    popupError.remove();
-    formUser.querySelector('.ad-form__submit').disabled = false;
-    formReset();
-    document.removeEventListener('keydown', closePopupErrorButton);
-  }
-
-};
-
-
-const closePopupSuccessButton = (evt) => {
-  if(evt.key === 'Escape') {
-    const popupSuccess = document.querySelector('.success');
-    popupSuccess.remove();
-    formUser.querySelector('.ad-form__submit').disabled = false;
-    formReset();
-    document.removeEventListener('keydown', closePopupSuccessButton);
-  }
-};
-
-const closePopupErrorClick = () => {
-  const popupError = document.querySelector('.error');
-  popupError.remove();
-  formUser.querySelector('.ad-form__submit').disabled = false;
-  formReset();
-  document.removeEventListener('keydown', closePopupErrorButton);
-};
-
-const closePopupSuccessClick = () => {
-  const popupSuccess = document.querySelector('.success');
-  popupSuccess.remove();
-  formUser.querySelector('.ad-form__submit').disabled = false;
-  formReset();
-  document.removeEventListener('keydown', closePopupSuccessButton);
-};
-
-const popupOpenError = () => {
-  const popupTemplateError = document.querySelector('#error').cloneNode(true).content;
-  document.body.appendChild(popupTemplateError);
-  formUser.querySelector('.ad-form__submit').disabled = true;
-
-  const popup = document.querySelector('.error');
-  popup.addEventListener('click', closePopupErrorClick);
-
-  document.addEventListener('keydown', closePopupErrorButton);
-
-};
-
-const popupOpenSuccess = () => {
-  const popupTemplateSuccess = document.querySelector('#success').cloneNode(true).content;
-  document.body.appendChild(popupTemplateSuccess);
-  formUser.querySelector('.ad-form__submit').disabled = true;
-
-  const popup = document.querySelector('.success');
-  popup.addEventListener('click', closePopupSuccessClick);
-
-  document.addEventListener('keydown', closePopupSuccessButton);
-};
-
-buttonReset.addEventListener('click', formReset);
-
-formUser.addEventListener('submit', (evt) => {
+announcementForm.form.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const formData = new FormData(evt.target);
-
-  fetch(EXPORT_SERVER, {
+  fetch(SERVER_PATH, {
     method: 'POST',
-    body: formData,
+    body: new FormData(evt.target),
   })
-    .then(() => popupOpenSuccess())
-    .catch(() => popupOpenError());
+    .then(createPopupSuccess)
+    .catch(createPopupError);
 
 });

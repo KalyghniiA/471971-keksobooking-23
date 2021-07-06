@@ -1,5 +1,6 @@
-import { userMarker, USER_MARKER_LAT, USER_MARKER_LNG } from './map.js';
+import { createStartingLocation, userMarker, USER_MARKER_LAT, USER_MARKER_LNG } from './map.js';
 
+const MIN_PRICE = 1000;
 const selectTypeHousing = document.querySelector('#type');
 const inputPrice = document.querySelector('#price');
 const selectQuantityRoom = document.querySelector('#room_number');
@@ -7,9 +8,9 @@ const selectCapacity = document.querySelector('#capacity');
 const selectTimeIn = document.querySelector('#timein');
 const selectTimeOut = document.querySelector('#timeout');
 const inputAddress = document.querySelector('#address');
+const buttonReset = document.querySelector('.ad-form__reset');
 
-
-const formUser = {
+const announcementForm = {
   form: document.querySelector('.ad-form'),
   childrens: [...document.querySelectorAll('.ad-form fieldset')],
 };
@@ -55,13 +56,13 @@ selectTypeHousing.addEventListener('change', () => {
   TYPES_OF_HOUSING.forEach(({ type, minPrice }) => {
     if (selectTypeHousing.value === type) {
       inputPrice.min = minPrice;
+      inputPrice.placeholder = minPrice;
     }
   });
 });
 
 selectQuantityRoom.addEventListener('change', (evt) => {
   let isSelectSet = false;
-
   for (const quantityPerson of selectCapacity.children) {
     const isAvailableQuantity = ROOMS_TO_GUESTS_MAPPER[evt.target.value].includes(+quantityPerson.value);
     quantityPerson.disabled = !isAvailableQuantity;
@@ -82,9 +83,8 @@ selectTimeOut.addEventListener('change', (evt) => {
   selectTimeIn.value = evt.target.value;
 });
 
-const toggleVisibleForm = ({form, childrens}, flaq) => {
-
-  if(flaq){
+const toggleVisibleForm = ({form, childrens}, shouldDisable) => {
+  if(shouldDisable){
     form.classList.add('ad-form--disabled');
     childrens.forEach((children) => children.disabled = !children.disabled);
   } else {
@@ -93,14 +93,17 @@ const toggleVisibleForm = ({form, childrens}, flaq) => {
   }
 };
 
-const formReset = () => {
-  formUser.form.reset();
-  inputAddress.value = `${USER_MARKER_LAT}, ${USER_MARKER_LNG}`;
+const resetForm = () => {
+  announcementForm.form.reset();
+  inputAddress.value = createStartingLocation();
+  inputPrice.placeholder = MIN_PRICE;
   userMarker.setLatLng(L.latLng(USER_MARKER_LAT, USER_MARKER_LNG));
 };
 
 
-toggleVisibleForm(formUser, disabledFormParameter);
+toggleVisibleForm(announcementForm, disabledFormParameter);
 toggleVisibleForm(formFilters, disabledFormParameter);
 
-export {TYPES_OF_HOUSING, inputAddress, toggleVisibleForm, formUser, formFilters, formReset};
+buttonReset.addEventListener('click', resetForm);
+
+export {TYPES_OF_HOUSING, inputAddress, toggleVisibleForm, announcementForm, formFilters, resetForm};
