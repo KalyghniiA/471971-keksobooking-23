@@ -1,13 +1,16 @@
+import { onResetForm } from './form.js';
+
+
 const selectTypeHousing = document.querySelector('#type');
 const inputPrice = document.querySelector('#price');
 const selectQuantityRoom = document.querySelector('#room_number');
 const selectCapacity = document.querySelector('#capacity');
 const selectTimeIn = document.querySelector('#timein');
 const selectTimeOut = document.querySelector('#timeout');
-const inputAddres = document.querySelector('#address');
+const inputAddress = document.querySelector('#address');
+const buttonReset = document.querySelector('.ad-form__reset');
 
-
-const formUser = {
+const announcementForm = {
   form: document.querySelector('.ad-form'),
   childrens: [...document.querySelectorAll('.ad-form fieldset')],
 };
@@ -53,13 +56,13 @@ selectTypeHousing.addEventListener('change', () => {
   TYPES_OF_HOUSING.forEach(({ type, minPrice }) => {
     if (selectTypeHousing.value === type) {
       inputPrice.min = minPrice;
+      inputPrice.placeholder = minPrice;
     }
   });
 });
 
 selectQuantityRoom.addEventListener('change', (evt) => {
   let isSelectSet = false;
-
   for (const quantityPerson of selectCapacity.children) {
     const isAvailableQuantity = ROOMS_TO_GUESTS_MAPPER[evt.target.value].includes(+quantityPerson.value);
     quantityPerson.disabled = !isAvailableQuantity;
@@ -80,9 +83,8 @@ selectTimeOut.addEventListener('change', (evt) => {
   selectTimeIn.value = evt.target.value;
 });
 
-const toggleVisibleForm = ({form, childrens}, flaq) => {
-
-  if(flaq){
+const toggleVisibleForm = ({form, childrens}, shouldDisable) => {
+  if(shouldDisable){
     form.classList.add('ad-form--disabled');
     childrens.forEach((children) => children.disabled = !children.disabled);
   } else {
@@ -91,8 +93,9 @@ const toggleVisibleForm = ({form, childrens}, flaq) => {
   }
 };
 
-
-toggleVisibleForm(formUser, disabledFormParameter);
+toggleVisibleForm(announcementForm, disabledFormParameter);
 toggleVisibleForm(formFilters, disabledFormParameter);
 
-export {TYPES_OF_HOUSING, inputAddres, toggleVisibleForm, formUser, formFilters};
+buttonReset.addEventListener('click', onResetForm);
+
+export {TYPES_OF_HOUSING, inputAddress, toggleVisibleForm, announcementForm, formFilters, inputPrice};

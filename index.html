@@ -115,7 +115,7 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес (координаты)</label>
-          <input id="address" name="address" type="text" disabled />
+          <input id="address" name="address" type="text" readonly/>
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
@@ -129,7 +129,7 @@
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-          <input id="price" name="price" type="number" placeholder="5000" min="1000" max="1000000" required />
+          <input id="price" name="price" type="number" placeholder="1000" min="1000" max="1000000" required />
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--time">
           <label class="ad-form__label" for="timein">Время заезда и выезда</label>
@@ -203,7 +203,7 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--submit">
           <button class="ad-form__submit" type="submit">Опубликовать</button>
-          или <button class="ad-form__reset" type="reset">очистить</button>
+          или <button class="ad-form__reset" type="button">очистить</button>
         </fieldset>
       </form>
     </section>
