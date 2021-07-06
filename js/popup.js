@@ -1,5 +1,4 @@
 import { onResetForm, toggleStateForm } from './form.js';
-import { announcementForm} from './validation.js';
 
 
 const removePopupElement = (selector) => {
