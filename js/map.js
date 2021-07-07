@@ -1,5 +1,9 @@
-import { MAP_LAT, MAP_LNG, USER_MARKER_LAT, USER_MARKER_LNG, USER_MARKER_SETTING, ZOOM_MAP } from './constants.js';
+import { MAP_LAT, MAP_LNG, USER_MARKER_LAT, USER_MARKER_LNG, MAIN_MARKER_SETTING, ZOOM_MAP } from './constants.js';
 import { formFilters, announcementForm, inputAddress, toggleVisibleForm } from './validation.js';
+/* import '../node_modules/leaflet/dist/leaflet.js';
+import '../node_modules/leaflet/dist/leaflet-src.js';
+import '../node_modules/leaflet/dist/leaflet-src.esm.js'; */
+/* import '../leaflet/leaflet.js'; */
 
 const enableFormParameter = false;
 
@@ -23,9 +27,9 @@ L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{
 }).addTo(myMap);
 
 const userMarkerIcon = L.icon({
-  iconUrl: USER_MARKER_SETTING.url,
-  iconSize: USER_MARKER_SETTING.size,
-  iconAnchor: USER_MARKER_SETTING.anchor,
+  iconUrl: MAIN_MARKER_SETTING.url,
+  iconSize: MAIN_MARKER_SETTING.size,
+  iconAnchor: MAIN_MARKER_SETTING.anchor,
 });
 
 const userMarker = L.marker([USER_MARKER_LAT, USER_MARKER_LNG], {icon: userMarkerIcon, draggable: true}).addTo(myMap);

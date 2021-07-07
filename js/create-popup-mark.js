@@ -1,3 +1,4 @@
+import { MARKER_SETTING } from './constants.js';
 import { myMap } from './map.js';
 
 
@@ -8,6 +9,12 @@ const HOUSING_TYPE_DICTIONARY = {
   house: 'Дом',
   palace: 'Дворец',
 };
+
+const settingMarker = L.icon({
+  iconUrl: MARKER_SETTING.url,
+  iconSize: MARKER_SETTING.size,
+  iconAnchor: MARKER_SETTING.anchor,
+});
 
 const templateUserPopap = document.querySelector('#card');
 
@@ -62,7 +69,7 @@ const createPopupCard = ({ author, offer, location }) => {
   const content = document.createElement('div');
   content.appendChild(element);
 
-  L.marker([location.lat, location.lng]).addTo(myMap).bindPopup(content);
+  L.marker([location.lat, location.lng], {icon:settingMarker}).addTo(myMap).bindPopup(content);
 
 
   return element;
