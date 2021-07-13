@@ -1,6 +1,6 @@
 import { MARKER_SETTING } from './constants.js';
+import { filterType} from './filter.js';
 import { myMap } from './map.js';
-
 
 const HOUSING_TYPE_DICTIONARY = {
   bungalow: 'Бунгало',
@@ -43,6 +43,8 @@ const createPopupImage = (imageArray, imageContainer) => {
   }
 };
 
+const layerGroup = L.layerGroup().addTo(myMap);
+
 const createPopupCard = ({ author, offer, location }) => {
   const element = templateUserPopap.cloneNode(true).content;
   const popupFeatures = element.querySelector('.popup__features');
@@ -69,20 +71,28 @@ const createPopupCard = ({ author, offer, location }) => {
   const content = document.createElement('div');
   content.appendChild(element);
 
-  L.marker([location.lat, location.lng], {icon:settingMarker}).addTo(myMap).bindPopup(content);
+  const marker = L.marker([location.lat, location.lng], {icon:settingMarker});
+  marker.addTo(layerGroup).bindPopup(content);
 
 
   return element;
 };
 
+const removeMapPin = () => {
+  layerGroup.clearLayers();
+};
+
 const createPopupCards = (cards) => {
   const fragment = document.createDocumentFragment();
-  cards.forEach((card) => {
-    const element = createPopupCard(card);
-    fragment.appendChild(element);
-  });
-
+  const sortCards = cards.slice();
+  filterType(sortCards)
+    .forEach((card) => {
+      const element = createPopupCard(card);
+      fragment.appendChild(element);
+    });
+  layerGroup.addTo(myMap);
   return fragment;
 };
 
-export {createPopupCards};
+
+export {createPopupCards, removeMapPin};
