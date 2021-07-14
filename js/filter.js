@@ -83,7 +83,7 @@ const filterPins = (arr) => {
 };
 
 
-const сhangeCheckbox = (cb) => {
+const changeCheckbox = (cb) => {
   chekboxsHousingFeatures.addEventListener('change', () => {
 
     removeMapPin();
@@ -91,32 +91,32 @@ const сhangeCheckbox = (cb) => {
   });
 };
 
-const сhangeFilterTypeHousing = (cb) => {
+const changeFilterTypeHousing = (cb) => {
   selectFilterTypeHousing.addEventListener('change', () => {
     removeMapPin();
     cb();
   });
 };
 
-const сhangeFilterPrice = (cb) => {
+const changeFilterPrice = (cb) => {
   selectFilterPrice.addEventListener('change', () => {
     removeMapPin();
     cb();
   });
 };
 
-const сhangeFilterRooms = (cb) => {
+const changeFilterRooms = (cb) => {
   selectFilterRooms.addEventListener('change', () => {
     removeMapPin();
     cb();
   });
 };
 
-const сhangeFilterGuests = (cb) => {
+const changeFilterGuests = (cb) => {
   selectFilterGuests.addEventListener('change', () => {
     removeMapPin();
     cb();
   });
 };
 
-export {filterPins, сhangeFilterTypeHousing, сhangeFilterPrice, сhangeFilterRooms, сhangeFilterGuests, сhangeCheckbox};
+export {filterPins, changeFilterTypeHousing, changeFilterPrice, changeFilterRooms, changeFilterGuests, changeCheckbox};
