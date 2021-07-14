@@ -1,5 +1,5 @@
 import { MARKER_SETTING } from './constants.js';
-import { filterType} from './filter.js';
+import { filterPins} from './filter.js';
 import { myMap } from './map.js';
 
 const HOUSING_TYPE_DICTIONARY = {
@@ -84,8 +84,8 @@ const removeMapPin = () => {
 
 const createPopupCards = (cards) => {
   const fragment = document.createDocumentFragment();
-  const sortCards = cards.slice();
-  filterType(sortCards)
+  const sortedCards = cards.slice();
+  filterPins(sortedCards)
     .forEach((card) => {
       const element = createPopupCard(card);
       fragment.appendChild(element);
