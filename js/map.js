@@ -1,9 +1,5 @@
 import { MAP_LAT, MAP_LNG, USER_MARKER_LAT, USER_MARKER_LNG, MAIN_MARKER_SETTING, ZOOM_MAP } from './constants.js';
 import { formFilters, announcementForm, inputAddress, toggleVisibleForm } from './validation.js';
-/* import '../node_modules/leaflet/dist/leaflet.js';
-import '../node_modules/leaflet/dist/leaflet-src.js';
-import '../node_modules/leaflet/dist/leaflet-src.esm.js'; */
-/* import '../leaflet/leaflet.js'; */
 
 const enableFormParameter = false;
 
