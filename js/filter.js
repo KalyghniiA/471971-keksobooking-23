@@ -11,7 +11,17 @@ const Default = {
   type: 'any',
   price: 'any',
   rooms: 'any',
-  quests: 'any',
+  guests: 'any',
+};
+
+const isValidTypeValue = (type, selectedFilterValue) => {
+  const filterValue = selectedFilterValue;
+
+  if (filterValue === Default.type) {
+    return true;
+  }
+
+  return type === filterValue;
 };
 
 const getPriceValue = (price) => {
@@ -30,7 +40,6 @@ const getPriceValue = (price) => {
 
 const isValidRoomsValue = (rooms, selectedFilterValue) => {
   const filterValue = selectedFilterValue;
-
   if (filterValue === Default.rooms) {
     return true;
   }
@@ -40,11 +49,9 @@ const isValidRoomsValue = (rooms, selectedFilterValue) => {
 
 const isValidGuestsValue = (guests, selectedFilterValue) => {
   const filterValue = selectedFilterValue;
-
   if (filterValue === Default.guests) {
     return true;
   }
-
   return guests === Number(filterValue);
 };
 
@@ -69,9 +76,8 @@ const filterPins = (pins) => {
       }
     }
 
-
     if (
-      [type, Default.type].includes(selectFilterTypeHousing.value)
+      isValidTypeValue(type, selectFilterTypeHousing.value)
     && [getPriceValue(price), Default.price].includes(selectFilterPrice.value)
     && isValidRoomsValue(rooms, selectFilterRooms.value)
     && isValidGuestsValue(guests, selectFilterGuests.value)
@@ -83,11 +89,12 @@ const filterPins = (pins) => {
       break;
     }
   }
+
   return copiedPins;
 };
 
 
-const addListenerChangeCheckbox = (cb) => {
+const setFeatureChangingFilterListener = (cb) => {
   checkboxesHousingFeatures.addEventListener('change', () => {
 
     removeMapPin();
@@ -95,32 +102,32 @@ const addListenerChangeCheckbox = (cb) => {
   });
 };
 
-const addListenerChangeFilterTypeHousing = (cb) => {
+const setHousingChangingFilterListener = (cb) => {
   selectFilterTypeHousing.addEventListener('change', () => {
     removeMapPin();
     cb();
   });
 };
 
-const addListenerChangeFilterPrice = (cb) => {
+const setPriceChangingFilterListener = (cb) => {
   selectFilterPrice.addEventListener('change', () => {
     removeMapPin();
     cb();
   });
 };
 
-const addListenerChangeFilterRooms = (cb) => {
+const setRoomsChangingFilterListener = (cb) => {
   selectFilterRooms.addEventListener('change', () => {
     removeMapPin();
     cb();
   });
 };
 
-const addListenerChangeFilterGuests = (cb) => {
+const setGuestsChangingFilterListener = (cb) => {
   selectFilterGuests.addEventListener('change', () => {
     removeMapPin();
     cb();
   });
 };
 
-export {filterPins, addListenerChangeFilterTypeHousing, addListenerChangeFilterPrice, addListenerChangeFilterRooms, addListenerChangeFilterGuests, addListenerChangeCheckbox};
+export {filterPins, setFeatureChangingFilterListener, setRoomsChangingFilterListener, setGuestsChangingFilterListener, setHousingChangingFilterListener, setPriceChangingFilterListener};
