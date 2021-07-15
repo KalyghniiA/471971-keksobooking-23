@@ -5,8 +5,8 @@ const selectFilterTypeHousing = document.querySelector('#housing-type');
 const selectFilterPrice = document.querySelector('#housing-price');
 const selectFilterRooms = document.querySelector('#housing-rooms');
 const selectFilterGuests = document.querySelector('#housing-guests');
-const chekboxsHousingFeatures = document.querySelector('#housing-features');
-const MAX_LENGTH_PINS_ARRAY = 10;
+const checkboxesHousingFeatures = document.querySelector('#housing-features');
+const MAX_PINS_ON_MAP = 10;
 const Default = {
   type: 'any',
   price: 'any',
@@ -15,67 +15,71 @@ const Default = {
 };
 
 const getPriceValue = (price) => {
-  if(price >= 10000 && price <= 50000) {
+  if (price >= 10000 && price <= 50000) {
     return 'middle';
   }
-  if(price < 10000) {
+
+  if (price < 10000) {
     return 'low';
   }
-  if(price > 50000) {
+
+  if (price > 50000) {
     return 'high';
   }
 };
 
-const getRoomsValue = (quantityRooms) => {
-  if(quantityRooms >= 3) {
-    return String(3);
-  }
-  //console.log(quantityRooms);
-  return String(quantityRooms);
-};
+const isValidRoomsValue = (rooms, selectedFilterValue) => {
+  const filterValue = selectedFilterValue;
 
-const getGuestsValue = (quantityQuests) => {
-  if(quantityQuests >= 2) {
-    return String(2);
+  if (filterValue === Default.rooms) {
+    return true;
   }
 
-  return String(quantityQuests);
+  return rooms === Number(filterValue);
 };
 
-const filterPins = (arr) => {
+const isValidGuestsValue = (guests, selectedFilterValue) => {
+  const filterValue = selectedFilterValue;
+
+  if (filterValue === Default.guests) {
+    return true;
+  }
+
+  return guests === Number(filterValue);
+};
+
+const filterPins = (pins) => {
   const copiedPins = [];
   const checkboxArrayChecked = [];
-  chekboxsHousingFeatures.querySelectorAll('.map__checkbox').forEach((el) => {
-    if(el.checked) {
-      checkboxArrayChecked.push(el.value);
-    }
+  checkboxesHousingFeatures.querySelectorAll('.map__checkbox:checked').forEach((el) => {
+    checkboxArrayChecked.push(el.value);
   });
 
-  mainLoop:for(let i = 0; i < arr.length; i++) {
+  mainLoop:for (let i = 0; i < pins.length; i++) {
 
-    const {offer: {type, price, rooms, guests, features}} = arr[i];
+    const {offer: {type, price, rooms, guests, features}} = pins[i];
 
-    featuresLoop:for(let j = 0; j < checkboxArrayChecked.length; j++) {
-      if(!checkboxArrayChecked) {
-        break featuresLoop;
+    for (let j = 0; j < checkboxArrayChecked.length; j++) {
+      if (! checkboxArrayChecked) {
+        break;
       }
-      if(!features
-        || !features.includes(checkboxArrayChecked[j])) {
+
+      if (! features || ! features.includes(checkboxArrayChecked[j])) {
         continue mainLoop;
       }
     }
 
 
-    if(
+    if (
       [type, Default.type].includes(selectFilterTypeHousing.value)
     && [getPriceValue(price), Default.price].includes(selectFilterPrice.value)
-    && [getRoomsValue(rooms), Default.rooms].includes(selectFilterRooms.value)
-    && [getGuestsValue(guests), Default.quests].includes(selectFilterGuests.value)
+    && isValidRoomsValue(rooms, selectFilterRooms.value)
+    && isValidGuestsValue(guests, selectFilterGuests.value)
     ) {
-      copiedPins.push(arr[i]);
+      copiedPins.push(pins[i]);
     }
 
-    if(copiedPins.length === MAX_LENGTH_PINS_ARRAY) {
+    if (copiedPins.length === MAX_PINS_ON_MAP) {
       break;
     }
   }
@@ -83,40 +87,40 @@ const filterPins = (arr) => {
 };
 
 
-const changeCheckbox = (cb) => {
-  chekboxsHousingFeatures.addEventListener('change', () => {
+const addListenerChangeCheckbox = (cb) => {
+  checkboxesHousingFeatures.addEventListener('change', () => {
 
     removeMapPin();
     cb();
   });
 };
 
-const changeFilterTypeHousing = (cb) => {
+const addListenerChangeFilterTypeHousing = (cb) => {
   selectFilterTypeHousing.addEventListener('change', () => {
     removeMapPin();
     cb();
   });
 };
 
-const changeFilterPrice = (cb) => {
+const addListenerChangeFilterPrice = (cb) => {
   selectFilterPrice.addEventListener('change', () => {
     removeMapPin();
     cb();
   });
 };
 
-const changeFilterRooms = (cb) => {
+const addListenerChangeFilterRooms = (cb) => {
   selectFilterRooms.addEventListener('change', () => {
     removeMapPin();
     cb();
   });
 };
 
-const changeFilterGuests = (cb) => {
+const addListenerChangeFilterGuests = (cb) => {
   selectFilterGuests.addEventListener('change', () => {
     removeMapPin();
     cb();
   });
 };
 
-export {filterPins, changeFilterTypeHousing, changeFilterPrice, changeFilterRooms, changeFilterGuests, changeCheckbox};
+export {filterPins, addListenerChangeFilterTypeHousing, addListenerChangeFilterPrice, addListenerChangeFilterRooms, addListenerChangeFilterGuests, addListenerChangeCheckbox};

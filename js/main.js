@@ -3,16 +3,16 @@ import './validation.js';
 import './data.js';
 import { getData } from './data.js';
 import {createPopupCards} from './create-popup-mark.js';
-import { changeFilterPrice, changeFilterGuests, changeFilterRooms, changeFilterTypeHousing, changeCheckbox } from './filter.js';
+import { addListenerChangeFilterPrice, addListenerChangeFilterGuests, addListenerChangeFilterRooms, addListenerChangeFilterTypeHousing, addListenerChangeCheckbox } from './filter.js';
 import { debounce } from './utils/debounce.js';
 
 
 getData((pins) => {
   createPopupCards(pins);
-  changeFilterTypeHousing(debounce(() => createPopupCards(pins), 500));
-  changeFilterPrice(debounce(() => createPopupCards(pins), 500));
-  changeFilterRooms(debounce(() => createPopupCards(pins), 500));
-  changeFilterGuests(debounce(() => createPopupCards(pins), 500));
-  changeCheckbox(debounce(() => createPopupCards(pins), 500));
+  addListenerChangeFilterTypeHousing(debounce(() => createPopupCards(pins), 500));
+  addListenerChangeFilterPrice(debounce(() => createPopupCards(pins), 500));
+  addListenerChangeFilterRooms(debounce(() => createPopupCards(pins), 500));
+  addListenerChangeFilterGuests(debounce(() => createPopupCards(pins), 500));
+  addListenerChangeCheckbox(debounce(() => createPopupCards(pins), 500));
 });
 
