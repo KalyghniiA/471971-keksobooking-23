@@ -16,4 +16,5 @@ export const MARKER_SETTING = {
 export const SERVER_PATH = 'https://23.javascript.pages.academy/keksobooking';
 export const SERVER_DATA = 'https://23.javascript.pages.academy/keksobooking/data';
 export const MIN_PRICE = 1000;
-export const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+export const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+export const AVATAR_TEMPLATE = 'img/muffin-grey.svg';
