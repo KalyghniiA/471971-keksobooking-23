@@ -5,24 +5,29 @@ const adImgChooser= document.querySelector('#images');
 
 
 adImgChooser.addEventListener('change', () => {
-  const adImgFile = adImgChooser.files[0];
-  const adImgFileName = adImgFile.name.toLowerCase();
+  const adImgFiles = Object.values(adImgChooser.files);
 
-  const matches = FILE_TYPES.some((it) => adImgFileName.endsWith(it));
+  adImgFiles.forEach((file) => {
 
-  if (matches) {
-    const reader = new FileReader();
+    const adImgFileName = file.name.toLowerCase();
 
-    reader.addEventListener('load', () => {
-      const adImg = document.createElement('img');
-      adImg.classList.add('ad-form__photo');
-      adImg.src = reader.result;
-      adImg.width = 70;
-      adImg.height = 70;
-      adImgContainer.appendChild(adImg);
-    });
+    const matches = FILE_TYPES.some((it) => adImgFileName.endsWith(it));
 
-    reader.readAsDataURL(adImgFile);
-  }
+    if (matches) {
+      const reader = new FileReader();
+
+      reader.addEventListener('load', () => {
+        const adImg = document.createElement('img');
+        adImg.classList.add('ad-form__photo');
+        adImg.src = reader.result;
+        adImg.width = 70;
+        adImg.height = 70;
+        adImgContainer.appendChild(adImg);
+      });
+
+      reader.readAsDataURL(file);
+    }
+  });
+
 
 });
