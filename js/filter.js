@@ -1,12 +1,11 @@
 /* eslint-disable id-length */
 import { removeMapPin } from './create-popup-mark.js';
-
+const MAX_PINS_ON_MAP = 10;
 const selectFilterTypeHousing = document.querySelector('#housing-type');
 const selectFilterPrice = document.querySelector('#housing-price');
 const selectFilterRooms = document.querySelector('#housing-rooms');
 const selectFilterGuests = document.querySelector('#housing-guests');
 const checkboxesHousingFeatures = document.querySelector('#housing-features');
-const MAX_PINS_ON_MAP = 10;
 const Default = {
   type: 'any',
   price: 'any',
@@ -57,21 +56,21 @@ const isValidGuestsValue = (guests, selectedFilterValue) => {
 
 const filterPins = (pins) => {
   const copiedPins = [];
-  const checkboxArrayChecked = [];
+  const checkboxChecked = [];
   checkboxesHousingFeatures.querySelectorAll('.map__checkbox:checked').forEach((el) => {
-    checkboxArrayChecked.push(el.value);
+    checkboxChecked.push(el.value);
   });
 
   mainLoop:for (let i = 0; i < pins.length; i++) {
 
     const {offer: {type, price, rooms, guests, features}} = pins[i];
 
-    for (let j = 0; j < checkboxArrayChecked.length; j++) {
-      if (! checkboxArrayChecked) {
+    for (let j = 0; j < checkboxChecked.length; j++) {
+      if (! checkboxChecked) {
         break;
       }
 
-      if (! features || ! features.includes(checkboxArrayChecked[j])) {
+      if (! features || ! features.includes(checkboxChecked[j])) {
         continue mainLoop;
       }
     }

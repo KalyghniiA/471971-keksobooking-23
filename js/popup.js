@@ -4,7 +4,10 @@ import { onResetForm, toggleStateForm } from './form.js';
 const removePopupElement = (selector) => {
   document.querySelector(selector).remove();
   toggleStateForm(false);
-  onResetForm();
+  if (selector !== '.error') {
+    onResetForm();
+  }
+
 };
 
 const additionPopupElement = (selector) => {

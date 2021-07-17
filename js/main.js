@@ -7,14 +7,15 @@ import { setFeatureChangingFilterListener, setGuestsChangingFilterListener, setH
 import { debounce } from './utils/debounce.js';
 import './preview-avatar.js';
 import './preview-photo-ad.js';
+import { DEBOUNCE_INTERVAL } from './constants.js';
 
 
 getData((pins) => {
   createPopupCards(pins);
-  setHousingChangingFilterListener(debounce(() => createPopupCards(pins), 500));
-  setPriceChangingFilterListener(debounce(() => createPopupCards(pins), 500));
-  setRoomsChangingFilterListener(debounce(() => createPopupCards(pins), 500));
-  setGuestsChangingFilterListener(debounce(() => createPopupCards(pins), 500));
-  setFeatureChangingFilterListener(debounce(() => createPopupCards(pins), 500));
+  setHousingChangingFilterListener(debounce(() => createPopupCards(pins), DEBOUNCE_INTERVAL));
+  setPriceChangingFilterListener(debounce(() => createPopupCards(pins), DEBOUNCE_INTERVAL));
+  setRoomsChangingFilterListener(debounce(() => createPopupCards(pins), DEBOUNCE_INTERVAL));
+  setGuestsChangingFilterListener(debounce(() => createPopupCards(pins), DEBOUNCE_INTERVAL));
+  setFeatureChangingFilterListener(debounce(() => createPopupCards(pins), DEBOUNCE_INTERVAL));
 });
 

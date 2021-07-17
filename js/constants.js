@@ -18,3 +18,4 @@ export const SERVER_DATA = 'https://23.javascript.pages.academy/keksobooking/dat
 export const MIN_PRICE = 1000;
 export const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 export const AVATAR_TEMPLATE = 'img/muffin-grey.svg';
+export const DEBOUNCE_INTERVAL = 500;

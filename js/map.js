@@ -35,4 +35,5 @@ userMarker.on('moveend', (evt) => {
   inputAddress.value = setStartingLocation(lat, lng);
 });
 
+
 export {myMap, userMarker, setStartingLocation};

@@ -1,9 +1,9 @@
 import { FILE_TYPES } from './constants.js';
 
-export const adImgContainer = document.querySelector('.ad-form__photo-container');
-const adImgChooser = document.querySelector('#images');
 const IMAGE_WIDTH = 70;
 const IMAGE_HEIGHT = 70;
+export const adImgContainer = document.querySelector('.ad-form__photo-container');
+const adImgChooser = document.querySelector('#images');
 
 
 adImgChooser.addEventListener('change', () => {

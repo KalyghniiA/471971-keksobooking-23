@@ -12,12 +12,12 @@ const buttonReset = document.querySelector('.ad-form__reset');
 
 const announcementForm = {
   form: document.querySelector('.ad-form'),
-  childrens: [...document.querySelectorAll('.ad-form fieldset')],
+  children: [...document.querySelectorAll('.ad-form fieldset')],
 };
 
 const formFilters ={
   form: document.querySelector('.map__filters'),
-  childrens: [...document.querySelectorAll('.map__filters fieldset,select')],
+  children: [...document.querySelectorAll('.map__filters fieldset,select')],
 };
 
 const TYPES_OF_HOUSING = [
@@ -83,13 +83,13 @@ selectTimeOut.addEventListener('change', (evt) => {
   selectTimeIn.value = evt.target.value;
 });
 
-const toggleVisibleForm = ({form, childrens}, shouldDisable) => {
+const toggleVisibleForm = ({form, children}, shouldDisable) => {
   if(shouldDisable){
     form.classList.add('ad-form--disabled');
-    childrens.forEach((children) => children.disabled = !children.disabled);
+    children.forEach((child) => child.disabled = !child.disabled);
   } else {
     form.classList.remove('ad-form--disabled');
-    childrens.forEach((children) => children.disabled = !children.disabled);
+    children.forEach((child) => child.disabled = !child.disabled);
   }
 };
 

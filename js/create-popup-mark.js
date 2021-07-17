@@ -16,7 +16,7 @@ const settingMarker = L.icon({
   iconAnchor: MARKER_SETTING.anchor,
 });
 
-const templateUserPopap = document.querySelector('#card');
+const templateUserPopup = document.querySelector('#card');
 
 const createPopupFeatures = (features, featuresContainer) => {
   if (features) {
@@ -28,9 +28,9 @@ const createPopupFeatures = (features, featuresContainer) => {
   }
 };
 
-const createPopupImage = (imageArray, imageContainer) => {
-  if (imageArray) {
-    imageArray.forEach((photoSrc) => {
+const createPopupImage = (images, imageContainer) => {
+  if (images) {
+    images.forEach((photoSrc) => {
       const photo = document.createElement('img');
 
       photo.classList.add('popup__photo');
@@ -46,7 +46,7 @@ const createPopupImage = (imageArray, imageContainer) => {
 const layerGroup = L.layerGroup().addTo(myMap);
 
 const createPopupCard = ({ author, offer, location }) => {
-  const element = templateUserPopap.cloneNode(true).content;
+  const element = templateUserPopup.cloneNode(true).content;
   const popupFeatures = element.querySelector('.popup__features');
   const features = offer.features;
   const popupPhotos = element.querySelector('.popup__photos');
