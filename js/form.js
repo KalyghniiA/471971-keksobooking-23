@@ -16,10 +16,10 @@ const onResetForm = () => {
   inputPrice.placeholder = MIN_PRICE;
   userMarker.setLatLng(L.latLng(USER_MARKER_LAT, USER_MARKER_LNG));
   avatarImg.src = AVATAR_TEMPLATE;
-  const imagesPreviewAd = adImgContainer.querySelectorAll('img.ad-form__photo');
-  imagesPreviewAd.forEach((image) => {
-    image.remove();
-  });
+  adImgContainer.querySelectorAll('img.ad-form__photo')
+    .forEach((image) => {
+      image.remove();
+    });
 };
 
 export {toggleStateForm, onResetForm};
