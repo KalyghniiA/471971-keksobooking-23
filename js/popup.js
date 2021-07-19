@@ -1,3 +1,5 @@
+import { createPopupCards } from './create-popup-mark.js';
+import { getData } from './data.js';
 import { onResetForm, toggleStateForm } from './form.js';
 
 
@@ -28,6 +30,10 @@ const onClosePopupErrorButton = (evt) => {
 const onClosePopupSuccessButton = (evt) => {
   if(evt.key === 'Escape') {
     removePopupElement('.success');
+    onResetForm();
+    getData((pins) => {
+      createPopupCards(pins);
+    });
     document.removeEventListener('keydown', onClosePopupSuccessButton);
   }
 };
@@ -39,6 +45,10 @@ const onClosePopupErrorClick = () => {
 
 const onClosePopupSuccessClick = () => {
   removePopupElement('.success');
+  onResetForm();
+  getData((pins) => {
+    createPopupCards(pins);
+  });
   document.removeEventListener('keydown', onClosePopupSuccessButton);
 };
 

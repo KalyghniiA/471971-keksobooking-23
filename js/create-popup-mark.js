@@ -129,6 +129,7 @@ const removeMapPin = () => {
 };
 
 const createPopupCards = (cards) => {
+  layerGroup.clearLayers();
   const fragment = document.createDocumentFragment();
   const sortedCards = cards.slice();
   filterPins(sortedCards)
