@@ -11,7 +11,7 @@ import './preview-avatar.js';
 import './preview-photo-ad.js';
 import { DEBOUNCE_INTERVAL, MAP_LAT, MAP_LNG, ZOOM_MAP } from './constants.js';
 import { myMap } from './map.js';
-import { announcementForm, formFilters, toggleVisibleForm } from './validation.js';
+import { announcementForm, formFilters, setPressReset, toggleVisibleForm } from './validation.js';
 
 const enableFormParameter = false;
 
@@ -25,6 +25,7 @@ myMap.on('load', () => {
     setRoomsChangingFilterListener(debounce(() => createPopupCards(pins), DEBOUNCE_INTERVAL));
     setGuestsChangingFilterListener(debounce(() => createPopupCards(pins), DEBOUNCE_INTERVAL));
     setFeatureChangingFilterListener(debounce(() => createPopupCards(pins), DEBOUNCE_INTERVAL));
+    setPressReset(() => createPopupCards(pins));
   });
 }).setView([MAP_LAT, MAP_LNG], ZOOM_MAP);
 
