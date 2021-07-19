@@ -1,10 +1,11 @@
 import { SERVER_DATA, SERVER_PATH } from './constants.js';
 import { createPopupError, createPopupSuccess} from './popup.js';
-import { announcementForm } from './validation.js';
+
 
 const CLASS_NAME = 'map__error';
 const TEXT = 'Произошла ошибка! Попробуйте обновить страницу';
 const BUTTON_TEXT = 'Закрыть';
+const announcementForm = document.querySelector('.ad-form');
 
 const createErrorMesage = () => {
 
@@ -18,12 +19,12 @@ const createErrorMesage = () => {
   message.appendChild(button);
   document.querySelector('.map__canvas').appendChild(message);
 
-  const closeErrorPopUpHandler = () => {
+  const onCloseErrorPopup = () => {
     message.remove();
-    document.removeEventListener('click', closeErrorPopUpHandler);
+    document.removeEventListener('click', onCloseErrorPopup);
   };
 
-  button.addEventListener('click', closeErrorPopUpHandler);
+  button.addEventListener('click', onCloseErrorPopup);
 };
 
 const getData = (onSuccess) => {
@@ -38,12 +39,15 @@ const getData = (onSuccess) => {
 };
 
 
-announcementForm.form.addEventListener('submit', (evt) => {
+announcementForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   fetch(SERVER_PATH, {
     method: 'POST',
     body: new FormData(evt.target),
   })
+    .then((response) => {
+      if (!response.ok) {throw new Error(`Error: status code ${response.status}`);}
+    })
     .then(createPopupSuccess)
     .catch(createPopupError);
 

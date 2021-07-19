@@ -13,7 +13,7 @@ export const MARKER_SETTING = {
   size: [40, 40],
   anchor: [20, 40],
 };
-export const SERVER_PATH = 'https://23.javascript.pages.academy/keksobooking';
+export const SERVER_PATH = 'https://23.javascript.pages.academy/keksobookig';
 export const SERVER_DATA = 'https://23.javascript.pages.academy/keksobooking/data';
 export const MIN_PRICE = 1000;
 export const FILE_TYPES = ['jpg', 'jpeg', 'png'];

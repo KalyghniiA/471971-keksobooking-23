@@ -84,7 +84,7 @@ selectTimeOut.addEventListener('change', (evt) => {
 });
 
 const toggleVisibleForm = ({form, children}, shouldDisable) => {
-  if(shouldDisable){
+  if (shouldDisable) {
     form.classList.add('ad-form--disabled');
     children.forEach((child) => child.disabled = !child.disabled);
   } else {
@@ -96,6 +96,12 @@ const toggleVisibleForm = ({form, children}, shouldDisable) => {
 toggleVisibleForm(announcementForm, disabledFormParameter);
 toggleVisibleForm(formFilters, disabledFormParameter);
 
-buttonReset.addEventListener('click', onResetForm);
+const setPressReset = (cb) => {
+  buttonReset.addEventListener('click', () => {
+    onResetForm();
+    cb();
+  });
 
-export {TYPES_OF_HOUSING, inputAddress, toggleVisibleForm, announcementForm, formFilters, inputPrice};
+};
+
+export {TYPES_OF_HOUSING, inputAddress, toggleVisibleForm, announcementForm, formFilters, inputPrice, setPressReset};

@@ -8,12 +8,17 @@ const adImgChooser = document.querySelector('#images');
 
 adImgChooser.addEventListener('change', () => {
   const adImgFiles = Object.values(adImgChooser.files);
+  const imagePlag = document.querySelector('div.ad-form__photo');
 
   adImgFiles.forEach((file) => {
 
     const adImgFileName = file.name.toLowerCase();
 
     const isValidExtension = FILE_TYPES.some((extension) => adImgFileName.endsWith(extension));
+
+    if (imagePlag) {
+      imagePlag.remove();
+    }
 
     if (isValidExtension) {
       const reader = new FileReader();

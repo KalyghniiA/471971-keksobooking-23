@@ -1,6 +1,8 @@
 /* eslint-disable id-length */
 import { removeMapPin } from './create-popup-mark.js';
 const MAX_PINS_ON_MAP = 10;
+const MIN_VALUE_FILTER_PRICE = 10000;
+const MAX_VALUE_FILTER_PRICE = 50000;
 const selectFilterTypeHousing = document.querySelector('#housing-type');
 const selectFilterPrice = document.querySelector('#housing-price');
 const selectFilterRooms = document.querySelector('#housing-rooms');
@@ -24,15 +26,15 @@ const isValidTypeValue = (type, selectedFilterValue) => {
 };
 
 const getPriceValue = (price) => {
-  if (price >= 10000 && price <= 50000) {
+  if (price >= MIN_VALUE_FILTER_PRICE && price <= MAX_VALUE_FILTER_PRICE) {
     return 'middle';
   }
 
-  if (price < 10000) {
+  if (price < MIN_VALUE_FILTER_PRICE) {
     return 'low';
   }
 
-  if (price > 50000) {
+  if (price > MAX_VALUE_FILTER_PRICE) {
     return 'high';
   }
 };
